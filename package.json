@@ -1,6 +1,6 @@
 {
   "name": "templatestringparser",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Process template strings",
   "main": "index.js",
   "scripts": {
