@@ -1,5 +1,5 @@
 # templateString
-A package that helps you process template strings
+A package that helps you process template strings against values
 
 ## Usage
 First, install the package using npm:
