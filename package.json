@@ -1,0 +1,25 @@
+{
+  "name": "templatestring",
+  "version": "1.0.0",
+  "description": "Process template strings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalasem/templateString.git"
+  },
+  "keywords": [
+    "string",
+    "template",
+    "email"
+  ],
+  "author": "Abdulsamii Ajala <kgasta@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "email": "kgasta@gmail.com",
+    "url": "https://github.com/jalasem/templateString/issues"
+  },
+  "homepage": "https://github.com/jalasem/templateString#readme"
+}
