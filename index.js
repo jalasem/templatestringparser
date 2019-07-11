@@ -8,7 +8,7 @@
  */
 
 /**
- * 
+ *
  * @param {string} template template string to be matched
  * @param {object} values variables to be parsed
  */
@@ -21,7 +21,6 @@ const processMail = (template, values) => {
     var re = new RegExp('{' + value + '}', "gm")
     processed = processed.replace(re, values[value])
   })
-  processed.replace(/\{.*?\}/gm, '')
 
   return processed
 }
