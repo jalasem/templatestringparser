@@ -1,6 +1,10 @@
 # templateString
 A package that helps you process template strings against values
 
+## Why you should use *templatestringparser*
+- optional configuration of *openingbracket* and *closingbracket*
+- supports single and multiple brackets like `{name}` `{{name}}` `${name}` `$(name)` etc
+
 ## Usage
 First, install the package using npm:
 ```
