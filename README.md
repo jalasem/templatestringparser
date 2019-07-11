@@ -3,7 +3,7 @@ A package that helps you process template strings against values
 
 ## Why you should use *templatestringparser*
 - optional configuration of *openingbracket* and *closingbracket*
-- supports single and multiple brackets like `{name}` `{{name}}` `${name}` `$(name)` etc
+- supports single and multiple brackets like `{name}` `{{name}}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
 
 ## Usage
 First, install the package using npm:
@@ -56,15 +56,15 @@ To override the default behavior, pass a 3rd argument of OBJECT TYPE specifying 
 ```javascript
 import templatestringparser as tsp from 'templatestringparser'
 
-var template = 'Hello (name), welcome to my Platform!'
+var template = 'Hello ${name}, welcome to my Platform!'
 
 var strObj = {
   name: 'Dave'
 }
 
 var config = {
-  openingbracket: '(',
-  closingbracket: ')'
+  openingbracket: '${', // some common examples '{','{{','(','<','<>'
+  closingbracket: '}' // some common examples '}','}}',')','>','/>','</>'
 }
 
 console.log(tsp(template, strObj, config)) // Hello Dave, Welcome to my Platform!
