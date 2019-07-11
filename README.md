@@ -1,7 +1,7 @@
 # templateString
 A package that helps you process template strings against values
 
-## Why you should use *templatestringparser*
+## Features
 - optional configuration of *openingbracket* and *closingbracket*
 - supports single and multiple brackets like `{name}` `{{name}}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
 
