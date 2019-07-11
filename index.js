@@ -22,11 +22,15 @@ const processMail = (template, values, config = settings()) => {
   if (Array.isArray(values) || typeof values !== 'object') return processed
 
   Object.keys(values).forEach(value => {
-    var re = new RegExp('\\' + openingbracket + value + '\\' + closingbracket, "gm")
+    var re = new RegExp(escapeRegExp(openingbracket) + value + escapeRegExp(closingbracket), "gm")
     processed = processed.replace(re, values[value])
   })
 
   return processed
+}
+
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 const settings = () => {
