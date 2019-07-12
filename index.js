@@ -15,28 +15,46 @@
  * @returns {string} interpolated or processed template string
  */
 const processMail = (template, values, config = settings()) => {
-  const {openingbracket, closingbracket} = config
+  // destructuring configurations
+  const {openingbracket, closingbracket, trim} = config
+
+  // setting default settings where config key is missing
+  var obk = (openingbracket) ? openingbracket : settings().openingbracket
+  var cbk = (closingbracket) ? closingbracket : settings().closingbracket
+  var trm = (trim) ? trim : settings().trim
 
   var processed = template
 
   if (Array.isArray(values) || typeof values !== 'object') return processed
 
   Object.keys(values).forEach(value => {
-    var re = new RegExp(escapeRegExp(openingbracket) + value + escapeRegExp(closingbracket), "gm")
+    var re = (trm)
+      ? new RegExp(escapeRegExp(obk) + '\\s*' + value + '\\s*' + escapeRegExp(cbk), "gm")
+      : new RegExp(escapeRegExp(obk) + value + escapeRegExp(cbk), "gm")
     processed = processed.replace(re, values[value])
   })
 
   return processed
 }
 
-const escapeRegExp = (string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+/**
+ *
+ * @param {string} regexp
+ * @returns {string} regexp with all special characters escaped
+ */
+const escapeRegExp = (regexp) => {
+  return regexp.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+/**
+ *
+ * @returns {object} default configurations or settings
+ */
 const settings = () => {
   return {
     openingbracket: '{',
-    closingbracket: '}'
+    closingbracket: '}',
+    trim: true // auto trim excess white spaces between key value and brackets
   }
 }
 
