@@ -30,7 +30,7 @@ const processMail = (template, values, config = settings()) => {
   Object.keys(values).forEach(value => {
     var re = (trm)
       ? new RegExp(escapeRegExp(obk) + '\\s*' + value + '\\s*' + escapeRegExp(cbk), "gm")
-      : new RegExp(escapeRegExp(obk) + value + escapeRegExp(cbk), "gm")
+      : new RegExp(escapeRegExp(obk) + '\\s{0,1}' + value + '\\s{0,1}' + escapeRegExp(cbk), "gm")
     processed = processed.replace(re, values[value])
   })
 
