@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jalasem/templateString.git"
+    "url": "git+https://github.com/jalasem/templatestringparser.git"
   },
   "keywords": [
     "string",
@@ -16,10 +16,16 @@
     "email"
   ],
   "author": "Abdulsamii Ajala <kgasta@gmail.com>",
+  "contributors": [
+    {
+      "name": "Tunji Oyeniran",
+      "email": "oyenirantunji2339@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "email": "kgasta@gmail.com",
-    "url": "https://github.com/jalasem/templateString/issues"
+    "url": "https://github.com/jalasem/templatestringparser/issues"
   },
-  "homepage": "https://github.com/jalasem/templateString#readme"
+  "homepage": "https://github.com/jalasem/templatestringparser#readme"
 }
