@@ -1,4 +1,4 @@
-# templateString
+# templatestringparser
 A package that helps you process template strings against values
 
 ## Features
