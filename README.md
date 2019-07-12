@@ -3,7 +3,8 @@ A package that helps you process template strings against values
 
 ## Features
 - optional configuration of *openingbracket* and *closingbracket*
-- supports single and multiple brackets like `{name}` `{{name}}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
+- supports single and multiple brackets like `{name}` `{{ name }}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
+- auto trim excess white space between key value and brackets
 
 ## Usage
 First, install the package using npm:
@@ -45,10 +46,10 @@ console.log(templateParser(template, { name: 'Dave' })) // Hello Dave, Welcome t
 
 ### Configurations
 
-#### openingbracket and closingbracket
+#### 1 openingbracket and closingbracket
 
-By default *templatestringparser* uses single curly brackets
-`{` as openingbracket and
+By default *templatestringparser* uses single curly brackets<br />
+`{` as openingbracket and<br />
 `}` as closingbracket.
 
 To override the default behavior, pass a 3rd argument of OBJECT TYPE specifying the *openingbracket* and *closingbracket*
@@ -68,6 +69,28 @@ var config = {
 }
 
 console.log(tsp(template, strObj, config)) // Hello Dave, Welcome to my Platform!
+```
+
+#### 2 trim
+
+The `trim` configuration will trim excess white space between key value and brackets.<br />
+This is enabled by default. Use `{trim: false}` in configuration to disable auto trimming.
+
+```javascript
+import templatestringparser as tsp from 'templatestringparser'
+
+var template = 'Hello {    name  }, welcome to my { space }!'
+
+var strObj = {
+  name: 'Dave',
+  space: 'World'
+}
+
+var config = {
+  trim: true
+}
+
+console.log(tsp(template, strObj, config)) // Hello Dave, Welcome to my World!
 ```
 
 Keeping up to date
