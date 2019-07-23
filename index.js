@@ -21,7 +21,7 @@ const processMail = (template, values, config = settings()) => {
   // setting default settings where config key is missing
   var obk = (openingbracket) ? openingbracket : settings().openingbracket
   var cbk = (closingbracket) ? closingbracket : settings().closingbracket
-  var trm = (trim) ? trim : settings().trim
+  var trm = (trim !== undefined && trim) ? trim : settings().trim
 
   var processed = template
 
