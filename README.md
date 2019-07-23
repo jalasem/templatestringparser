@@ -5,6 +5,7 @@ A package that helps you process template strings against values
 - optional configuration of *openingbracket* and *closingbracket*
 - supports single and multiple brackets like `{name}` `{{ name }}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
 - auto trim excess white space between key value and brackets
+- parse deeply nested values e.g. `profile.name` `address.street` etc
 
 ## Usage
 First, install the package using npm:
@@ -42,6 +43,38 @@ import templatestringparser as templateParser from 'templatestringparser'
 
 const template = 'Hello {name}, welcome to my Platform!'
 console.log(templateParser(template, { name: 'Dave' })) // Hello Dave, Welcome to my Platform!
+```
+
+### Features
+#### `openingbracket` and `closingbracket`
+Jump to [Configurations #1](/#1-openingbracket-and-closingbracket)
+
+#### auto `trim`
+Jump to [Configurations #2](/#2-trim)
+
+#### parse deeply nested values
+```javascript
+var tsp = require('templatestringparser')
+
+var template = 'Hello {profile.name}, welcome to my {profile.space}!'
+template += ' I live at No.{profile.address.street.number} {profile.address.street.name},'
+template += ' {profile.address.city}.'
+
+var strObj = {
+  profile: {
+    name: 'Dave',
+    space: 'World',
+    address: {
+      street: {
+        number: 1,
+        name: 'strictly'
+      },
+      city: 'boston'
+    }
+  }
+}
+
+console.log(tsp(template, strObj)) // Hello Dave, welcome to my World! I live at No.1 strictly, boston.
 ```
 
 ### Configurations
