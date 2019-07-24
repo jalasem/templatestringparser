@@ -45,12 +45,14 @@ const template = 'Hello {name}, welcome to my Platform!'
 console.log(templateParser(template, { name: 'Dave' })) // Hello Dave, Welcome to my Platform!
 ```
 
-### Features
+<br />
+
+### Features in Detail
 #### `openingbracket` and `closingbracket`
-Jump to [Configurations #1](/#1-openingbracket-and-closingbracket)
+Jump to [Configurations #1](#1-openingbracket-and-closingbracket)
 
 #### auto `trim`
-Jump to [Configurations #2](/#2-trim)
+Jump to [Configurations #2](#2-trim)
 
 #### parse deeply nested values
 ```javascript
@@ -76,6 +78,8 @@ var strObj = {
 
 console.log(tsp(template, strObj)) // Hello Dave, welcome to my World! I live at No.1 strictly, boston.
 ```
+
+<br />
 
 ### Configurations
 
