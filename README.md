@@ -5,7 +5,7 @@ A package that helps you process template strings against values
 - optional configuration of *openingbracket* and *closingbracket*
 - supports single and multiple brackets like `{name}` `{{ name }}` `${name}` `$(name)` `<name>` `<name/>` `<>name</>` etc
 - auto trim excess white space between key value and brackets
-- parse deeply nested values e.g. `profile.name` `address.street` etc
+- parse deeply nested values e.g. `{profile.name}` `{address.street}` etc
 
 ## Usage
 First, install the package using npm:
