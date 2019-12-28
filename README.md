@@ -130,6 +130,10 @@ var config = {
 console.log(tsp(template, strObj, config)) // Hello Dave, Welcome to my World!
 ```
 
+## Contributing
+- Fork, improve, make pull request
+- raise issues for suggestions, things to fix and avenues for improvement
+
 Keeping up to date
 ------------------
 - [Follow me on Twitter](https://twitter.com/ajalaabdulsamii) for updates: [https://twitter.com/ajalaabdulsamii](https://twitter.com/ajalaabdulsamii)
