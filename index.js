@@ -14,7 +14,7 @@
  * @param {object} [config=settings()] configurations for the template string interpolation
  * @returns {string} interpolated or processed template string
  */
-const processMail = (template, values, config = settings()) => {
+const processTemplate = (template, values, config = settings()) => {
   // destructuring configurations
   const {openingbracket, closingbracket, trim} = config
 
@@ -88,4 +88,4 @@ const settings = () => {
   }
 }
 
-module.exports = processMail
+module.exports = processTemplate
