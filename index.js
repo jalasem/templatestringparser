@@ -8,73 +8,53 @@
  */
 
 /**
- *
- * @param {string} template template string to be matched
- * @param {object} values variables to be parsed
- * @param {object} [config=settings()] configurations for the template string interpolation
- * @returns {string} interpolated or processed template string
+ * Processes a template string by interpolating values based on a given configuration.
+ * 
+ * @param {string} template - Template string to be processed.
+ * @param {object} values - Variables to be interpolated into the template.
+ * @param {object} config - Configurations for template interpolation with defaults.
+ * @returns {string} - The processed template string.
  */
 const processTemplate = (template, values, config = settings()) => {
-  // destructuring configurations
-  const {openingbracket, closingbracket, trim} = config
+  const { openingBracket, closingBracket, trim } = config;
+  const flattenedValues = flattenObj(values);
 
-  // setting default settings where config key is missing
-  var obk = (openingbracket) ? openingbracket : settings().openingbracket
-  var cbk = (closingbracket) ? closingbracket : settings().closingbracket
-  var trm = (trim !== undefined && trim) ? trim : settings().trim
-
-  var processed = template
-
-  // flatten values object
-  values = flattenObj(values)
-
-  if (Array.isArray(values) || typeof values !== 'object') return processed
-
-  Object.keys(values).forEach(value => {
-    var re = (trm)
-      ? new RegExp(escapeRegExp(obk) + '\\s*' + value + '\\s*' + escapeRegExp(cbk), "gm")
-      : new RegExp(escapeRegExp(obk) + '\\s{0,1}' + value + '\\s{0,1}' + escapeRegExp(cbk), "gm")
-    processed = processed.replace(re, values[value])
-  })
-
-  return processed
-}
-
-/**
- *
- * @param {string} regexp
- * @returns {string} regexp with all special characters escaped
- */
-const escapeRegExp = (regexp) => {
-  return regexp.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-/**
- *
- * @param {object} data deeply nested object OR an already flattened object
- * @returns {object} flattened object
- */
-const flattenObj = (data) => {
-  var result = {}
-  function recurse (cur, prop) {
-    if (Object(cur) !== cur) {
-      result[prop] = cur
-    } else if (Array.isArray(cur)) {
-      for(var i = 0, l = cur.length; i < l; i++)
-        recurse(cur[i], prop + "[" + i + "]")
-      if (l == 0) result[prop] = []
-    } else {
-      var isEmpty = true
-      for (var p in cur) {
-        isEmpty = false
-        recurse(cur[p], (prop) ? prop + "." + p : p)
-      }
-      if (isEmpty && prop) result[prop] = {}
-    }
+  if (typeof flattenedValues !== 'object' || Array.isArray(flattenedValues)) {
+    return template;
   }
-  recurse(data, "")
-  return result
-}
+
+  return Object.entries(flattenedValues).reduce((acc, [key, value]) => {
+    const pattern = trim ? `${escapeRegExp(openingBracket)}\\s*${key}\\s*${escapeRegExp(closingBracket)}` : `${escapeRegExp(openingBracket)}${key}${escapeRegExp(closingBracket)}`;
+    const regex = new RegExp(pattern, "gm");
+    return acc.replace(regex, value);
+  }, template);
+};
+
+/**
+ * Escapes special characters in a string for use in a regular expression.
+ * 
+ * @param {string} str - String to be escaped.
+ * @returns {string} - Escaped string.
+ */
+const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * Flattens a nested object into a single-level object with dot-separated keys.
+ * 
+ * @param {object} obj - Object to be flattened.
+ * @returns {object} - Flattened object.
+ */
+const flattenObj = (obj, base = '', result = {}) => {
+  Object.entries(obj).forEach(([key, value]) => {
+    const newKey = base ? `${base}.${key}` : key;
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      flattenObj(value, newKey, result);
+    } else {
+      result[newKey] = value;
+    }
+  });
+  return result;
+};
 
 /**
  *
