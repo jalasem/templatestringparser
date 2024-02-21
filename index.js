@@ -15,7 +15,7 @@
  * @param {object} config - Configurations for template interpolation with defaults.
  * @returns {string} - The processed template string.
  */
-const processTemplate = (template, values, config = settings()) => {
+const processTemplate = (template, values, config = getConfig()) => {
   const { openingBracket, closingBracket, trim } = config;
   const flattenedValues = flattenObj(values);
 
@@ -66,6 +66,22 @@ const settings = () => {
     closingbracket: '}',
     trim: true // auto trim excess white spaces between key value and brackets
   }
+}
+
+/**
+ * 
+ * @param {*object} config 
+ * @returns default settings where config key is missing
+ */
+
+const getConfig = (config={}) => {
+  const defaultConfig = settings();
+
+  return {
+    openingBracket: config.openingBracket || defaultConfig.openingBracket,
+    closingBracket: config.closingBracket || defaultConfig.closingBracket,
+    trim: (config.trim !== undefined && config.trim) ? config.trim : defaultConfig.trim
+  };
 }
 
 module.exports = processTemplate
